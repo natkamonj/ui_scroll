@@ -26,78 +26,42 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> items = List.generate(100, (i) => 'Item ${i + 1}');
+
     return Scaffold(
       appBar: AppBar(title: Text('Chapter6'), backgroundColor: Colors.orange),
-      body: Stack(
-        alignment:
-            //Alignment.
-            Alignment.center, // จัดกึ่งกลาง children ที่ไม่ได้กำหนดตำแหน่ง
-        children: <Widget>[
-          // รูปภาพพื้นหลัง
-          Image.network(
-            'https://picsum.photos/id/1015/300/300',
-            fit: BoxFit.cover,
-          ),
 
-          // Text ที่กำหนดตำแหน่งไว้มุมบนซ้าย
-          Positioned(
-            top: 10.0,
-            left: 10.0,
-            child: Container(
-              padding: const EdgeInsets.all(8.0),
-              color: Colors.black.withOpacity(0.5), // พื้นหลังกึ่งโปร่งใส
-              child: const Text(
-                'Top Left',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
+      body: GridView.builder(
+        padding: EdgeInsets.all(8.0),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          //childAspectRatio: 8 /8, // สูง/กว้าง
+          childAspectRatio: 0.9,
+          mainAxisSpacing: 8.0,
+          crossAxisSpacing: 8.0,
+        ),
+        itemCount: items.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            color: Colors.orange[100 + (index % 6) * 100],
 
-          // Icon ที่กำหนดตำแหน่งไว้มุมล่างขวา
-          Positioned(
-            bottom: 10.0,
-            right: 10.0,
-            child: Container(
-              padding: const EdgeInsets.all(4.0),
-              decoration: BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle, // ทำให้เป็นป้ายวงกลม
-              ),
-              child: const Icon(
-                Icons.notifications,
-                color: Colors.white,
-                size: 20,
-              ),
-            ),
-          ),
-          // Text ที่กำหนดตำแหน่งไว้มุมบนขวา
-          Positioned(
-            top: 10.0,
-            right: 10.0,
-            child: Container(
-              padding: const EdgeInsets.all(8.0),
-              color: Colors.black.withOpacity(0.5), // พื้นหลังกึ่งโปร่งใส
-              child: const Text(
-                'Top Right',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-          // Text ที่กำหนดตำแหน่งไว้มุมล่างซ้าย
-          Positioned(
-            bottom: 10.0,
-            left: 10.0,
-            child: Container(
-              padding: const EdgeInsets.all(8.0),
-              color: Colors.black.withOpacity(0.5), // พื้นหลังกึ่งโปร่งใส
-              child: const Text(
-                'Bottom Left',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ],
+            child: Center(child: Text('Tile $index')),
+          );
+        },
       ),
+
+      //body: GridView.count(
+      //crossAxisCount: 5, //2 คอลัมน์
+      //childAspectRatio: 5 / 10, // ความกว้างเป็น 1.5 เท่าของความสูง
+      //padding: const EdgeInsets.all(0.0), //ระยะห่างครอบ
+      //mainAxisSpacing: 10.0, // ระยะห่างแนวตั้ง
+      //crossAxisSpacing: 10.0, // ระยะห่างแนวนอน
+      //children: List<Widget>.generate(20, (index) {
+      // สร้างไอเท็มตัวอย่าง 20 อัน
+      //return Container(
+      //color: Colors.teal[100 + (index % 8) * 100],
+      //child: Center(child: Text('Item $index')),
+      //);
+      //}),
     );
   }
 }

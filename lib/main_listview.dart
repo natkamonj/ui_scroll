@@ -25,43 +25,25 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> items = List.generate(100, (i) => 'Item ${i + 1}');
+    List<String> items = List.generate(50, (i) => 'Item ${i + 1}');
 
     return Scaffold(
-      appBar: AppBar(title: Text('Chapter6'), backgroundColor: Colors.orange),
-
-      body: GridView.builder(
-        padding: EdgeInsets.all(8.0),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          //childAspectRatio: 8 /8, // สูง/กว้าง
-          childAspectRatio: 0.9,
-          mainAxisSpacing: 8.0,
-          crossAxisSpacing: 8.0,
-        ),
+      appBar: AppBar(
+        title: Text('Chapter6'),
+        backgroundColor: const Color.fromARGB(255, 235, 93, 38),
+      ),
+      body: ListView.builder(
         itemCount: items.length,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-            color: Colors.orange[100 + (index % 6) * 100],
-
-            child: Center(child: Text('Tile $index')),
+          return ListTile(
+            title: Text(items[index]),
+            subtitle: Text(items[index]),
+            onTap: () {
+              print(items[index]);
+            },
           );
         },
       ),
-
-      //body: GridView.count(
-      //crossAxisCount: 5, //2 คอลัมน์
-      //childAspectRatio: 5 / 10, // ความกว้างเป็น 1.5 เท่าของความสูง
-      //padding: const EdgeInsets.all(0.0), //ระยะห่างครอบ
-      //mainAxisSpacing: 10.0, // ระยะห่างแนวตั้ง
-      //crossAxisSpacing: 10.0, // ระยะห่างแนวนอน
-      //children: List<Widget>.generate(20, (index) {
-      // สร้างไอเท็มตัวอย่าง 20 อัน
-      //return Container(
-      //color: Colors.teal[100 + (index % 8) * 100],
-      //child: Center(child: Text('Item $index')),
-      //);
-      //}),
     );
   }
 }
