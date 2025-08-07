@@ -28,8 +28,10 @@ class MyHomePage extends StatelessWidget {
     List<String> items = List.generate(50, (i) => 'Item ${i + 1}');
 
     return Scaffold(
-      appBar: AppBar(title: Text('Chapter6'), 
-      backgroundColor: const Color.fromARGB(255, 235, 93, 38)),
+      appBar: AppBar(
+        title: Text('Chapter6'),
+        backgroundColor: const Color.fromARGB(255, 235, 93, 38),
+      ),
       body: ListView.builder(
         itemCount: items.length,
         itemBuilder: (BuildContext context, int index) {
